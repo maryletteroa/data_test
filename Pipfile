@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 pandas = "*"
 lxml = "*"
+pyspark = "*"
+databricks-cli = "*"
 
 [dev-packages]
 isort = "*"
