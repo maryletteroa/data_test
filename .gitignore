@@ -1,0 +1,4 @@
+.coverage
+Pipfile.lock
+.pytest_cache
+.mypy_cache

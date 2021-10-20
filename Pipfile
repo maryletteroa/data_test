@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "*"
+lxml = "*"
+
+[dev-packages]
+isort = "*"
+flake8 = "*"
+black = "==21.9b0"
+mypy = "*"
+pytest = "*"
+sphinx = "*"
+pytest-cov = "*"
+pre-commit = "*"
+datatest = "*"
+
+[requires]
+python_version = "3.9"
