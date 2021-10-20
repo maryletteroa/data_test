@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 09:50:10
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-20 19:11:39
+# @Last Modified time: 2021-10-20 19:33:31
 
 """
 Extracts retail data from websites
@@ -11,10 +11,12 @@ And writes them into csv files
 
 from typing import IO
 import os
+
 try:
     from commons import *
 except ModuleNotFoundError:
     from .commons import *
+
 import pandas as pd
 
 
