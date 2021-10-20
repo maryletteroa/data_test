@@ -3,3 +3,4 @@ Pipfile.lock
 .pytest_cache
 .mypy_cache
 sandbox
+data_testing/raw
