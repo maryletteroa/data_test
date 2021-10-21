@@ -1,9 +1,9 @@
 TEST_COVERAGE_CUTOFF=90
 
 clean:
-	rm -rf data_testing/raw/test.csv
+	rm -rf data/raw/test.csv
 run:
-	python data_testing
-tests:
+	python src/extract
+run-tests:
 	pipenv run pytest --cov --cov-fail-under=$(TEST_COVERAGE_CUTOFF)
 doc:	

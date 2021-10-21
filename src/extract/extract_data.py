@@ -2,22 +2,22 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 09:50:10
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-20 19:33:31
+# @Last Modified time: 2021-10-21 09:01:38
 
 """
 Extracts retail data from websites
 And writes them into csv files
 """
 
-from typing import IO
 import os
+import sys
 
-try:
-    from commons import *
-except ModuleNotFoundError:
-    from .commons import *
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from commons.paths import root_dir
+
 
 import pandas as pd
+from typing import IO
 
 
 def get_data_table(url: str) -> pd.DataFrame:
@@ -51,7 +51,7 @@ def write_data_table(table: pd.DataFrame, file_name: str) -> IO:
     Returns:
         IO: [description]: A csv file
     """
-    out_path: str = f"{root_dir}/data_testing/raw"
+    out_path: str = f"{root_dir}/data/raw"
     if not os.path.exists(out_path):
         os.mkdir(out_path)
     return table.to_csv(f"{out_path}/{file_name}.csv", index=False)
