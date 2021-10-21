@@ -19,6 +19,7 @@ sphinx = "*"
 pytest-cov = "*"
 pre-commit = "*"
 datatest = "*"
+pandas-profiling = "*"
 
 [requires]
 python_version = "3.9"

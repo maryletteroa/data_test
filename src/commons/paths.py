@@ -2,18 +2,24 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 17:14:05
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 09:32:49
+# @Last Modified time: 2021-10-21 10:20:33
 
 """
 Contains shared variables
 """
 
+# higher level directories
 root_dir = "/mnt/d/Projects/data_tests_demo/retail_data"
-data_dir = f"{root_dir}/data"
 scripts_dir = f"{root_dir}/src"
+docs_dir = f"{root_dir}/docs"
 
 # data dirs
+data_dir = f"{root_dir}/data"
 raw_data_dir = f"{data_dir}/raw"
+
+# profile dirs
+data_profile_dir = f"{docs_dir}/data_profiles"
+raw_data_profile_dir = f"{data_profile_dir}/raw"
 
 
 urls = {
