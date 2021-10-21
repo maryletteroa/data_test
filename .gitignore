@@ -5,3 +5,4 @@ sandbox
 data/*
 docs/*
 __pycache__
+.pre-commit-config.yaml
