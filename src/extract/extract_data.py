@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 09:50:10
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 10:10:36
+# @Last Modified time: 2021-10-21 13:52:31
 
 """
 Extracts retail data from websites
@@ -37,16 +37,20 @@ def get_data_table(url: str) -> pd.DataFrame:
     return table
 
 
-def write_data_table(table: pd.DataFrame, file_name: str) -> IO:
-    """Writes table to a csv file
+def write_data_table(table: pd.DataFrame, 
+        output_dir: str,
+        prefix: str,
+        ) -> IO:
 
+    """Writes table to a csv file
+    
     Args:
         table (pd.DataFrame): Table or data to be written
-        file_name (str): File name of csv file
-
+        output_dir (str): Output directory
+        prefix (str): Name of file
+    
     Returns:
         IO: [description]: A csv file
+
     """
-    if not os.path.exists(raw_data_dir):
-        os.mkdir(raw_data_dir)
-    return table.to_csv(f"{raw_data_dir}/{file_name}.csv", index=False)
+    return table.to_csv(f"{output_dir}/{prefix}.csv", index=False)
