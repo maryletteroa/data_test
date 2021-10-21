@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 10:02:12
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 14:59:47
+# @Last Modified time: 2021-10-21 18:27:45
 
 """
 Function to generate the data profile
@@ -14,6 +14,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 import pandas as pd
 from pandas_profiling import ProfileReport
+import great_expectations as ge
+
 from typing import Optional, IO
 from datetime import datetime
 
@@ -57,5 +59,10 @@ def generate_data_profile_from_csv(
             minimal=False,
             sensitive=False,
             dataset = metadata,
+            explorative=True,
         ).to_file(f"{output_path}")
     )
+
+
+def generate_ge_suit():
+    suite = profile.to_expectation_suite()

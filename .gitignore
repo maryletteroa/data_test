@@ -4,3 +4,4 @@
 sandbox
 data/*
 docs/*
+__pycache__

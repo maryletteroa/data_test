@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:25
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 17:24:31
+# @Last Modified time: 2021-10-21 18:01:02
 
 """
 Functions to ingest data to raw
@@ -50,6 +50,8 @@ def read_csv_to_spark(
         .withColumn("ingest_datetime", current_timestamp())
 
     return df
+
+# data checks before writing
 
 def write_delta_table(
         df: pd.DataFrame,

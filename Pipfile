@@ -20,6 +20,7 @@ pytest-cov = "*"
 pre-commit = "*"
 datatest = "*"
 pandas-profiling = "*"
+great-expectations = "*"
 
 [requires]
 python_version = "3.9"
