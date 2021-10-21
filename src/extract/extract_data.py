@@ -2,18 +2,17 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 09:50:10
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 13:52:31
+# @Last Modified time: 2021-10-21 16:04:59
 
 """
-Extracts retail data from websites
-And writes them into csv files
+Functions to extract data from websites
+And write them into csv files
 """
 
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from commons.paths import raw_data_dir
 import pandas as pd
 from typing import IO
 

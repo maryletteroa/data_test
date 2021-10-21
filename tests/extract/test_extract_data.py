@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 14:05:22
+# @Last Modified time: 2021-10-21 16:02:04
 
 import os
 import sys
@@ -60,14 +60,14 @@ def test_column_names():
 
 
 @pytest.mark.skipif(
-    glob(f"{raw_data_dir}/*") == [],
+    glob(f"{source_data_dir}/*") == [],
     reason="The production data has not been extracted yet",
 )
 def test_extracted_data_present():
     data_files = (
-        f"{raw_data_dir}/stores_dataset.csv",
-        f"{raw_data_dir}/sales_dataset.csv",
-        f"{raw_data_dir}/features_dataset.csv",
+        f"{source_data_dir}/stores_dataset.csv",
+        f"{source_data_dir}/sales_dataset.csv",
+        f"{source_data_dir}/features_dataset.csv",
     )
     
     # extracted data exists in directory
@@ -75,7 +75,7 @@ def test_extracted_data_present():
         assert os.path.exists(data_file)
 
     # no other file present in folder
-    assert set(glob(f"{raw_data_dir}/*")) == set(data_files)
+    assert set(glob(f"{source_data_dir}/*")) == set(data_files)
 
 
     # row counts correspond to expected
