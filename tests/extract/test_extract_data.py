@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 16:02:04
+# @Last Modified time: 2021-10-22 10:24:15
 
 import os
 import sys
@@ -17,9 +17,9 @@ from glob import glob
 from src.extract.extract_data import *
 from src.commons.paths import *
 
-
 # functions that return data tables
 # to be used in succeeding tests
+
 def df_store():
     return get_data_table(test_data["stores_dataset"])
 
@@ -40,7 +40,7 @@ def test_write_data_table(tmpdir):
     data_file = f"{tmpdir}/test.csv"
     assert os.path.exists(data_file)
 
-
+## if datatest is not being used
 # def test_column_names():
 # 	assert list(df().columns) == ["Store", "Type", "Size"]
 
@@ -59,16 +59,19 @@ def test_column_names():
         dt.validate(data_table().columns, required_column_names[data_table])
 
 
+@pytest.fixture
+def data_files():
+    return (
+                f"{source_data_dir}/stores_dataset.csv",
+                f"{source_data_dir}/sales_dataset.csv",
+                f"{source_data_dir}/features_dataset.csv",
+            )
+
 @pytest.mark.skipif(
     glob(f"{source_data_dir}/*") == [],
     reason="The production data has not been extracted yet",
-)
-def test_extracted_data_present():
-    data_files = (
-        f"{source_data_dir}/stores_dataset.csv",
-        f"{source_data_dir}/sales_dataset.csv",
-        f"{source_data_dir}/features_dataset.csv",
-    )
+) 
+def test_extracted_data_present(data_files):
     
     # extracted data exists in directory
     for data_file in data_files:
@@ -78,7 +81,11 @@ def test_extracted_data_present():
     assert set(glob(f"{source_data_dir}/*")) == set(data_files)
 
 
-    # row counts correspond to expected
+@pytest.mark.skipif(
+    glob(f"{source_data_dir}/*") == [],
+    reason="The production data has not been extracted yet",
+) 
+def test_expected_row_counts(data_files):
     row_counts = {
         "stores" : 46,
         "sales" : 421571,
