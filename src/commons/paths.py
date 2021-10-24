@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 17:14:05
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 18:02:06
+# @Last Modified time: 2021-10-22 10:37:57
 
 """
 Contains shared variables
@@ -20,7 +20,7 @@ raw_data_dir = f"{data_dir}/raw"
 
 # profile dirs
 data_profile_dir = f"{docs_dir}/data_profiles"
-raw_data_profile_dir = f"{data_profile_dir}/raw"
+source_data_profile_dir = f"{data_profile_dir}/source"
 
 
 test_data = {
