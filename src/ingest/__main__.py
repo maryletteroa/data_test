@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:11
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 17:24:37
+# @Last Modified time: 2021-10-24 09:09:12
 
 import os
 import sys
@@ -20,6 +20,21 @@ from ingest_data import read_csv_to_spark, write_delta_table
 #     DoubleType,
 #     BooleanType,
 #     )
+
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from commons.paths import production_data, source_data_dir
+from extract_data import write_data_table, get_data_table
+
+for name in production_data:
+    print(f"getting data for: {name}...")
+    write_data_table(
+        get_data_table(production_data[name]),
+        f"{source_data_dir}",
+        name
+    )
+
 
 
 # ingest src data to raw delta table

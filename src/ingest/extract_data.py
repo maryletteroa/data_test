@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 09:50:10
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 16:04:59
+# @Last Modified time: 2021-10-24 09:12:55
 
 """
 Functions to extract data from websites

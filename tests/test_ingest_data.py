@@ -2,12 +2,12 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-22 10:24:15
+# @Last Modified time: 2021-10-24 09:12:29
 
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import datatest as dt
 import pandas as pd
@@ -94,3 +94,10 @@ def test_expected_row_counts(data_files):
     for d, data_file in enumerate(data_files):
         with open(data_file) as dfile:
             assert row_counts[list(row_counts.keys())[d]] == len(dfile.readlines())
+
+# path is not empty
+# data types are strings
+# p_ingest_date and ingest_datetime cols are present
+# expected number of colums 
+# expected number of rows
+# no duplicate imports

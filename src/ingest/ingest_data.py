@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:25
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-21 18:01:02
+# @Last Modified time: 2021-10-24 09:09:59
 
 """
 Functions to ingest data to raw
@@ -79,3 +79,10 @@ def write_delta_table(
             .partitionBy(partition_col)
             .parquet(output_dir)
     )
+
+# path is not empty
+# data types are strings
+# p_ingest_date and ingest_datetime cols are present
+# expected number of colums 
+# expected number of rows
+# no duplicate imports
