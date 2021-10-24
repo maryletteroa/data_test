@@ -2,52 +2,27 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:11
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 09:09:12
+# @Last Modified time: 2021-10-24 13:03:46
 
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from includes.paths import production_data, raw_data_dir
+from ingest_data import get_data_table, create_spark_dataframe, write_delta_table
 
-from commons.paths import source_data_dir, raw_data_dir
-from ingest_data import read_csv_to_spark, write_delta_table
+extracted_df = {}
 
-# from pyspark.sql.types import (
-#     StructType, 
-#     StructField, 
-#     StringType, 
-#     IntegerType, 
-#     DateType, 
-#     DoubleType,
-#     BooleanType,
-#     )
-
-import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from commons.paths import production_data, source_data_dir
-from extract_data import write_data_table, get_data_table
-
+# extract data table from url
 for name in production_data:
+    data_url = production_data[name]
     print(f"getting data for: {name}...")
-    write_data_table(
-        get_data_table(production_data[name]),
-        f"{source_data_dir}",
-        name
-    )
 
+    extracted_df[name] = get_data_table(data_url)
 
-
-# ingest src data to raw delta table
-source_data_sets = {
-    "store": f"{source_data_dir}/stores_dataset.csv",
-    "sales": f"{source_data_dir}/sales_dataset.csv",
-    "features": f"{source_data_dir}/features_dataset.csv",
-}
-
-
-for name, path, in source_data_sets.items():
-    df = read_csv_to_spark(
-        csv_file_path=path,
+# ingest to delta table
+for name, df_extracted, in extracted_df.items():
+    df = create_spark_dataframe(
+        data=path,
         status="new",
         tag="raw"
         )
