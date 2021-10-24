@@ -2,114 +2,113 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 14:07:37
+# @Last Modified time: 2021-10-24 17:57:22
 
 import os
 import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 from glob import glob
-from collections import namedtuple
-
-import datatest as dt
-import pytest
-import pandas as pd
-
-from src.includes.paths import raw_data_dir, test_data_urls
+from src._includes.paths import test_data_urls, raw_data_dir
+from src.extract.extract_from_urls import write_table_csv, get_data_from_urls
 from src.ingest.ingest_data import *
 
+import pytest
+import datatest as dt
+from pyspark.sql import SparkSession
+import great_expectations as ge
+from great_expectations.dataset.sparkdf_dataset import SparkDFDataset
+
+from pyspark.sql.types import (
+    _parse_datatype_string, 
+    StringType, 
+    DataType
+)
+spark = SparkSession.builder.getOrCreate()
 
 @pytest.fixture
-def datasets():
-    Data = namedtuple("Data", ("stores","sales","features"))
-    data = Data(
-        stores = get_data_table(test_data_urls["stores"]),
-        sales = get_data_table(test_data_urls["sales"]),
-        features = get_data_table(test_data_urls["features"]),
-        )
-    return data
-
-@pytest.mark.mandatory
-def test_column_names(datasets):
-
-    cols = (
-           (datasets.stores, {"Store", "Type", "Size"}),
-           (datasets.sales, {"Store", "Dept", "Date", "Weekly_Sales", "IsHoliday"}),
-           (datasets.features, {"Fuel_Price", "Date", "Unemployment", "MarkDown4", 
-                "Store", "MarkDown2", "MarkDown3", "CPI", "MarkDown1", "Temperature", "MarkDown5", "IsHoliday"}),
+def test_csv(tmpdir):
+    write_table_csv(
+        get_data_from_urls(test_data_urls["stores"]).head(), 
+        tmpdir, 
+        "test"
     )
-
-    for cols in [*cols]:
-        df, required_cols = cols
-        dt.validate(df.columns, required_cols )
-
-@pytest.mark.skip
-def test_column_names_are_uppercase(datasets):
-    for name in datasets._fields:
-        dt.validate(getattr(datasets, name).columns, lambda x: x.istitle())
+    return f"{tmpdir}/test.csv"
 
 
-def test_expected_shape(datasets):
-    shapes = (
-       (datasets.stores, (45, 3)),
-       # (datasets.sales, (421570, 5)),
-       (datasets.sales, (1000, 5)),
-       (datasets.features, (8190, 12)),
-    )
-
-    for shape in [*shapes]:
-        df, expected_shape = shape
-        assert df.shape == expected_shape
-
-def test_exceptions_are_working():
-    invalid_url = "www.google.com"
-    with pytest.raises(Exception):
-        get_data_table("invalid_url")
-
-def test_create_spark_dataframe(datasets):
-    for name in datasets._fields:
-        df = create_spark_dataframe(
-            data=getattr(datasets, name),
-            status="new",
-            tag="raw"
-            )
-        assert all(col for col in ["status", "p_ingest_date", "ingest_datetime", "tag"] if col in df.columns)
-
-def test_write_delta_table(datasets):
-    for name in datasets._fields:
-        df = create_spark_dataframe(
-            data = getattr(datasets, name),
+def test_read_csv_to_spark(test_csv):
+    df = read_csv_to_spark(
+            spark = spark,
+            csv_file_path = test_csv,
             status = "new",
-            tag = "raw"
+            tag = "raw",
+            )
+    assert all(
+            col for col in ["status", "p_ingest_date", "ingest_datetime", "tag"] 
+            if col in df.columns
+        )
+
+def test_write_delta_table(tmpdir, test_csv):
+    df = read_csv_to_spark(
+            spark = spark,
+            csv_file_path = test_csv,
+            status = "new",
+            tag = "raw",
             )
 
-        write_delta_table(
-            data=df,
-            output_dir = raw_data_dir,
-            name= name)
-        assert os.path.exists(f"{raw_data_dir}/{name}")
+    write_delta_table(
+        df=df,
+        partition_col = "p_ingest_date",
+        output_dir = tmpdir,
+        prefix= "test")
+    assert os.path.exists(f"{tmpdir}/test")
+
+
 
 @pytest.mark.skipif(
     glob(f"{raw_data_dir}/*") == [],
-    reason="The data has not been ingested yet",
+    reason="The data have not been ingested",
 )
-def test_raw_data_present():
+@pytest.mark.mandatory
+def test_raw_tables_present():
     data_files = (
         f"{raw_data_dir}/stores",
         f"{raw_data_dir}/sales",
         f"{raw_data_dir}/features",
     )
+    
     for data_file in data_files:
         assert os.path.exists(data_file)
 
     # no other file present in folder
     assert set(glob(f"{raw_data_dir}/*")) == set(data_files)
 
+@pytest.fixture
+def df_stores():
+    return spark.read.load(f"{raw_data_dir}/stores")
 
-# path is not empty
-# data types are strings
-# p_ingest_date and ingest_datetime cols are present
-# expected number of colums 
-# expected number of rows
-# no duplicate imports
+def test_raw_table_schema(df_stores):
+    raw_data_schema = _parse_datatype_string("""
+        Store STRING,
+        Type STRING,
+        Size STRING,
+        status STRING,
+        tag STRING,
+        ingest_datetime TIMESTAMP,
+        p_ingest_date DATE"""
+    )
+ 
+    assert df_stores.schema == raw_data_schema
+
+
+def test_raw_table_schema2(df_stores):
+    test = ge.dataset.SparkDFDataset(df_stores)
+    assert test.expect_column_values_to_be_of_type("Store", "StringType").success
+
+def test_raw_table_shape(df_stores):
+    assert (df_stores.count(), len(df_stores.columns)) == (45,7)
+
+
+def test_raw_store_column(df_stores):
+    df = df_stores.toPandas()
+    assert df.drop_duplicates().shape == (45, 7)

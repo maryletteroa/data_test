@@ -7,10 +7,10 @@ Attributes:
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:25
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 13:09:19
+# @Last Modified time: 2021-10-24 16:16:36
 
 """
-Functions to ingest data to raw
+Functions to ingest and tag data to raw delta tables
 """
 
 
@@ -30,44 +30,26 @@ from typing import IO
 
 spark = SparkSession.builder.getOrCreate()
 
-
-def get_data_table(url: str) -> pd.DataFrame:
-    """Parses table out from a website
-    
-    Args:
-        url (str): Website URL
-    
-    Returns:
-        pd.DataFrame: A pandas dataframe containing the data
-    
-    Raises:
-        Exception: Catch all for all errors including invalid or unavailable URLs.
-    """
-    try:
-        table: pd.DataFrame = pd.read_html(url, header=1,)[0].iloc[:, 1:]
-    except:
-        raise Exception("Something went wrong")
-    return table
-
-
-def create_spark_dataframe(
-        data: pd.DataFrame,
+def read_csv_to_spark(
+        spark: SparkSession,
+        csv_file_path:str,
         status: str,
         tag: str,
         ) -> pd.DataFrame:
-    """Summary
+    """Reads the csv from source to spark dataframe
     
     Args:
-        data (pd.DataFrame): Description
-        status (str): Description
-        tag (str): Description
+        spark (SparkSession): Description
+        csv_file_path (str): Path to csv file
+        status (str): status of the data [new]
+        tag (str): tag for the data e.g. raw, processed
     
     Returns:
         pd.DataFrame: Description
     """
-    df = spark.createDataFrame(
-        data = data)
-
+    df = spark.read \
+        .option("header", True) \
+        .csv(csv_file_path)
     df = df \
         .withColumn("status", lit(status)) \
         .withColumn("tag", lit(tag)) \
@@ -76,41 +58,33 @@ def create_spark_dataframe(
 
     return df
 
+# data checks before writing
+
 def write_delta_table(
-        data: pd.DataFrame,
+        df: pd.DataFrame,
+        partition_col: str,
         output_dir: str,
-        name: str,
+        prefix: str,
         mode: str = "append",
-        partition_col: str = "p_ingest_date",
     ) -> None:
 
     """Writes data to delta table
     
     Args:
-        data (pd.DataFrame): Spark dataframe to write
+        df (pd.DataFrame): Spark dataframe to write
+        partition_col (str): column to parition
         output_dir (str): Output path
-        name (str): Name of table
+        prefix (str): Prefix/ name of delta table
         mode (str, optional): Mode (default="append")
-        partition_col (str, optional): column to parition
     
     Returns:
         None: Writes delta table to output_dir
     """
-    if not os.path.exists(output_dir):
-        os.mkdir(output_dir)
-
     return (
-        data \
+        df \
             .write \
-            .format("delta") \
+            .format("parquet") \
             .mode(mode) \
             .partitionBy(partition_col)
-            .parquet(f"{output_dir}/{name}")
+            .parquet(f"{output_dir}/{prefix}")
     )
-
-# path is not empty
-# data types are strings
-# p_ingest_date and ingest_datetime cols are present
-# expected number of colums 
-# expected number of rows
-# no duplicate imports

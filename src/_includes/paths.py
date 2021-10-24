@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 17:14:05
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 13:13:44
+# @Last Modified time: 2021-10-24 18:56:44
 
 """
 Contains shared variables
@@ -15,11 +15,16 @@ docs_dir = f"{root_dir}/docs"
 
 # data dirs
 data_dir = f"{root_dir}/data"
-raw_data_dir = f"{data_dir}/raw"
+source_data_dir = f"{data_dir}/0_source"
+raw_data_dir = f"{data_dir}/1_raw"
 
 # profile dirs
 data_profile_dir = f"{docs_dir}/data_profiles"
-raw_data_profile_dir = f"{data_profile_dir}/raw"
+source_data_profile_dir = f"{data_profile_dir}/0_source"
+
+
+# great_expectations
+great_expectations_root = f"{docs_dir}/great_expectations"
 
 
 test_data_urls = {
