@@ -7,7 +7,7 @@ Attributes:
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:25
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 16:16:36
+# @Last Modified time: 2021-10-25 14:45:04
 
 """
 Functions to ingest and tag data to raw delta tables
@@ -20,13 +20,11 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 
 from pyspark.sql import SparkSession
-import pyspark.sql.dataframe 
 import pandas as pd
 from pyspark.sql.functions import (
+    current_date,
     current_timestamp, 
-    current_date, 
     lit)
-from typing import IO
 
 spark = SparkSession.builder.getOrCreate()
 
@@ -53,8 +51,8 @@ def read_csv_to_spark(
     df = df \
         .withColumn("status", lit(status)) \
         .withColumn("tag", lit(tag)) \
-        .withColumn("p_ingest_date", current_date()) \
-        .withColumn("ingest_datetime", current_timestamp())
+        .withColumn("ingest_datetime", current_timestamp()) \
+        .withColumn("p_ingest_date", current_date())
 
     return df
 

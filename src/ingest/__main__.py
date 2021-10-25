@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:11
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 16:14:48
+# @Last Modified time: 2021-10-25 09:52:37
 
 import os
 import sys
@@ -16,7 +16,6 @@ from pyspark.sql import SparkSession
 spark = SparkSession.builder.getOrCreate()
 
 names = ("stores", "sales", "features")
-
 # ingest raw data
 if not os.path.exists(raw_data_dir):
     os.mkdir(raw_data_dir)

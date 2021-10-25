@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 08:10:08
+# @Last Modified time: 2021-10-25 14:45:42
 
 import os
 import sys
@@ -44,7 +44,7 @@ def test_read_csv_to_spark(test_csv):
             tag = "raw",
             )
     assert all(
-            col for col in ["status", "p_ingest_date", "ingest_datetime", "tag"] 
+            col for col in ["status", "p_ingest_date", "tag"] 
             if col in df.columns
         )
 
@@ -62,8 +62,6 @@ def test_write_delta_table(tmpdir, test_csv):
         output_dir = tmpdir,
         prefix= "test")
     assert os.path.exists(f"{tmpdir}/test")
-
-
 
 @pytest.mark.skipif(
     glob(f"{raw_data_dir}/*") == [],
@@ -94,7 +92,7 @@ def test_raw_table_schema(df_stores):
         Size STRING,
         status STRING,
         tag STRING,
-        ingest_datetime TIMESTAMP,
+        ingest_datetime DATETIME,
         p_ingest_date DATE"""
     )
  
@@ -106,7 +104,6 @@ def test_raw_table_schema(df_stores):
 
 def test_raw_table_shape(df_stores):
     assert (df_stores.count(), len(df_stores.columns)) == (45,7)
-
 
 def test_raw_store_column(df_stores):
     df = df_stores.toPandas()

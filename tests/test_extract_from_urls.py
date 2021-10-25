@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-24 14:27:58
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 17:12:55
+# @Last Modified time: 2021-10-25 15:05:37
 
 import os
 import sys
@@ -20,17 +20,6 @@ from src._includes.paths import test_data_urls, source_data_dir
 
 # functions that return data tables
 # to be used in succeeding tests
-
-def test_exceptions_are_working():
-    invalid_url = "www.google.com"
-    with pytest.raises(Exception):
-        get_data_from_urls("invalid_url")
-
-def test_write_table_csv(tmpdir):
-    df = get_data_from_urls(test_data_urls["stores"])
-    write_table_csv(df.head(), tmpdir, "test")
-    data_file = f"{tmpdir}/test.csv"
-    assert os.path.exists(data_file)
 
 
 @pytest.fixture
@@ -51,11 +40,25 @@ def datasets(csvs):
             )
     return datasets
 
+
+def test_exceptions_are_working():
+    invalid_url = "www.google.com"
+    with pytest.raises(Exception):
+        get_data_from_urls("invalid_url")
+
+def test_write_table_csv(tmpdir):
+    df = get_data_from_urls(test_data_urls["stores"])
+    write_table_csv(df.head(), tmpdir, "test")
+    data_file = f"{tmpdir}/test.csv"
+    assert os.path.exists(data_file)
+
 @pytest.mark.skipif(
     glob(f"{source_data_dir}/*") == [],
     reason="The production data has not been extracted yet",
 )
-@pytest.mark.mandatory
+def test_source_data_dir_exists():
+    assert os.path.exists(source_data_dir)
+
 def test_extracted_data(csvs):
 
     # extracted data exists in directory
@@ -64,6 +67,15 @@ def test_extracted_data(csvs):
 
     # no other file present in folder
     assert set(glob(f"{source_data_dir}/*")) == set(csvs)
+
+
+# ---------- data testing----------------
+
+
+# @pytest.mark.skipif(
+#     glob(f"{source_data_dir}/*") == [],
+#     reason="The production data has not been extracted yet",
+# )
 
 def test_shapes(datasets):
     shapes = {

@@ -9,6 +9,9 @@ run-tests:
 	pipenv run pytest --cov --cov-fail-under=$(TEST_COVERAGE_CUTOFF)
 run: run-tests
 	python src/extract
+	python src/ingest
+	python src/transform
+build-docs:
+	great_expectations docs build -y
 ge:
 	great_expectations --v2-api init -d docs --no-view
-doc:	
