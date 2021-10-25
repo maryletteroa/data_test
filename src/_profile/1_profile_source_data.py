@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 10:02:24
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 08:23:32
+# @Last Modified time: 2021-10-25 17:00:28
 
 """
 Generates profiles of pertinent datasets
@@ -13,6 +13,7 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from glob import glob
+import pandas as pd
 
 from _includes.paths import (
     source_data_dir, 

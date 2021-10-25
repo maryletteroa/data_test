@@ -8,7 +8,7 @@ and write them to csv
 # @Author: Marylette B. Roa
 # @Date:   2021-10-24 14:26:09
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 14:48:44
+# @Last Modified time: 2021-10-25 17:15:55
 
 import os
 import sys

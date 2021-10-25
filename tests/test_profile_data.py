@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 14:04:19
+# @Last Modified time: 2021-10-25 15:27:38
 
 import os
 import sys
@@ -14,7 +14,7 @@ import pytest
 from os.path import exists
 from glob import glob
 
-from src.includes.paths import raw_data_profile_dir
+from src._includes.paths import raw_data_profile_dir
 
 # TODO: add pytest evaluation of lengths of test
 @pytest.mark.skipif(

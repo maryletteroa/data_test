@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 14:45:42
+# @Last Modified time: 2021-10-25 18:24:51
 
 import os
 import sys
@@ -18,6 +18,7 @@ import datatest as dt
 from pyspark.sql import SparkSession
 import great_expectations as ge
 from great_expectations.dataset.sparkdf_dataset import SparkDFDataset
+from collections import namedtuple
 
 from pyspark.sql.types import (
     _parse_datatype_string, 
@@ -26,6 +27,7 @@ from pyspark.sql.types import (
 )
 spark = SparkSession.builder.getOrCreate()
 
+# ---- start fixtures ------#
 @pytest.fixture
 def test_csv(tmpdir):
     write_table_csv(
@@ -34,6 +36,27 @@ def test_csv(tmpdir):
         "test"
     )
     return f"{tmpdir}/test.csv"
+
+@pytest.fixture
+def tables():
+    return (
+        f"{raw_data_dir}/stores",
+        f"{raw_data_dir}/sales",
+        f"{raw_data_dir}/features"
+    )
+
+@pytest.fixture
+def datasets(tables):
+    Data = namedtuple("Data", ("stores", "sales", "features"))
+    data = Data(
+        stores = spark.read.load(tables[0]),
+        sales = spark.read.load(tables[1]),
+        features = spark.read.load(tables[2]),
+    )
+    return data
+
+# ---- end fixtures ------#
+
 
 
 def test_read_csv_to_spark(test_csv):
@@ -44,7 +67,7 @@ def test_read_csv_to_spark(test_csv):
             tag = "raw",
             )
     assert all(
-            col for col in ["status", "p_ingest_date", "tag"] 
+            col for col in ["status", "p_ingest_date", "tag", "ingest_datetime"] 
             if col in df.columns
         )
 
@@ -54,57 +77,78 @@ def test_write_delta_table(tmpdir, test_csv):
             csv_file_path = test_csv,
             status = "new",
             tag = "raw",
-            )
+    )
 
     write_delta_table(
-        df=df,
+        data=df,
         partition_col = "p_ingest_date",
         output_dir = tmpdir,
-        prefix= "test")
+        name= "test")
     assert os.path.exists(f"{tmpdir}/test")
+
+# ------- data test ----------
 
 @pytest.mark.skipif(
     glob(f"{raw_data_dir}/*") == [],
     reason="The data have not been ingested",
 )
-@pytest.mark.mandatory
-def test_raw_tables_present():
-    data_files = (
-        f"{raw_data_dir}/stores",
-        f"{raw_data_dir}/sales",
-        f"{raw_data_dir}/features",
-    )
-    
-    for data_file in data_files:
-        assert os.path.exists(data_file)
+class TestData:
+    def test_raw_tables_present(self, tables):
 
-    # no other file present in folder
-    assert set(glob(f"{raw_data_dir}/*")) == set(data_files)
+        for table in tables:
+            assert os.path.exists(table)
 
-@pytest.fixture
-def df_stores():
-    return spark.read.load(f"{raw_data_dir}/stores")
+        # no other file present in folder
+        assert set(glob(f"{raw_data_dir}/*")) == set(tables)
 
-def test_raw_table_schema(df_stores):
-    raw_data_schema = _parse_datatype_string("""
-        Store STRING,
-        Type STRING,
-        Size STRING,
-        status STRING,
-        tag STRING,
-        ingest_datetime DATETIME,
-        p_ingest_date DATE"""
-    )
- 
-    assert df_stores.schema == raw_data_schema
+    def test_raw_table_schema(self, datasets):
+        raw_data_schema_stores = _parse_datatype_string("""
+            Store STRING,
+            Type STRING,
+            Size STRING,
+            status STRING,
+            tag STRING,
+            ingest_datetime TIMESTAMP,
+            p_ingest_date DATE"""
+        )
 
-# def test_raw_table_schema2(df_stores):
-#     test = ge.dataset.SparkDFDataset(df_stores)
-#     assert test.expect_column_values_to_be_of_type("Store", "StringType").success
+        raw_data_schema_sales = _parse_datatype_string("""
+            Store STRING,
+            Dept STRING,
+            Date STRING,
+            Weekly_Sales STRING,
+            IsHoliday STRING,
+            status STRING,
+            tag STRING,
+            ingest_datetime TIMESTAMP,
+            p_ingest_date DATE"""
+        )
 
-def test_raw_table_shape(df_stores):
-    assert (df_stores.count(), len(df_stores.columns)) == (45,7)
+        raw_data_schema_features = _parse_datatype_string("""
+            Store STRING,
+            Date STRING,
+            Temperature STRING,
+            Fuel_Price STRING,
+            MarkDown1 STRING,
+            MarkDown2 STRING,
+            MarkDown3 STRING,
+            MarkDown4 STRING,
+            MarkDown5 STRING,
+            CPI STRING,
+            Unemployment STRING,
+            IsHoliday STRING,
+            status STRING,
+            tag STRING,
+            ingest_datetime TIMESTAMP,
+            p_ingest_date DATE"""
+        )
+     
 
-def test_raw_store_column(df_stores):
-    df = df_stores.toPandas()
-    assert df.drop_duplicates().shape == (45, 7)
+        assert datasets.stores.schema == raw_data_schema_stores
+        assert datasets.sales.schema == raw_data_schema_sales
+        assert datasets.features.schema == raw_data_schema_features
+
+    def test_raw_table_shape(self, datasets):
+        assert (datasets.stores.count(), len(datasets.stores.columns)) == (45, 7)
+        assert (datasets.sales.count(), len(datasets.sales.columns)) == (421570, 9)
+        assert (datasets.features.count(), len(datasets.features.columns)) == (8190, 16)
