@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 17:57:22
+# @Last Modified time: 2021-10-25 08:10:08
 
 import os
 import sys
@@ -100,10 +100,9 @@ def test_raw_table_schema(df_stores):
  
     assert df_stores.schema == raw_data_schema
 
-
-def test_raw_table_schema2(df_stores):
-    test = ge.dataset.SparkDFDataset(df_stores)
-    assert test.expect_column_values_to_be_of_type("Store", "StringType").success
+# def test_raw_table_schema2(df_stores):
+#     test = ge.dataset.SparkDFDataset(df_stores)
+#     assert test.expect_column_values_to_be_of_type("Store", "StringType").success
 
 def test_raw_table_shape(df_stores):
     assert (df_stores.count(), len(df_stores.columns)) == (45,7)

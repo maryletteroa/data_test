@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 10:02:12
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 19:20:42
+# @Last Modified time: 2021-10-25 09:30:35
 
 """
 Function to generate the data profile
@@ -15,6 +15,9 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 import pandas as pd
 from pandas_profiling import ProfileReport
 from great_expectations.data_context import DataContext
+from great_expectations.dataset import SparkDFDataset
+from great_expectations.profile.basic_dataset_profiler import BasicDatasetProfiler
+
 
 
 from datetime import datetime
@@ -63,15 +66,30 @@ def generate_data_profile(
 
     return profile
 
-def build_expectation_suite(
+def build_expectation_suite_from_pandas_profiling(
     pandas_profile: ProfileReport,
     data_context: DataContext,
     suite_name: str,
-    ):
+    )-> None:
 
     pandas_profile.to_expectation_suite(
         suite_name=suite_name,
         data_context=data_context,
-        run_validation=True,
+        run_validation=False,
         build_data_docs=True,
         )
+
+def build_expectation_suite_from_spark(
+    data: pd.DataFrame,
+    expectations_path: str
+    ) -> None:
+
+    profiler = BasicDatasetProfiler()
+
+    expectation_suite, validation_result = \
+        BasicDatasetProfiler.profile(
+            SparkDFDataset(data), 
+        )
+
+    with open(expectations_path, "w") as outf:
+        print(expectation_suite, file=outf)

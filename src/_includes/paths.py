@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 17:14:05
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-24 18:56:44
+# @Last Modified time: 2021-10-25 08:22:20
 
 """
 Contains shared variables
@@ -25,6 +25,7 @@ source_data_profile_dir = f"{data_profile_dir}/0_source"
 
 # great_expectations
 great_expectations_root = f"{docs_dir}/great_expectations"
+expectations_suite_dir = f"{great_expectations_root}/expectations"
 
 
 test_data_urls = {
