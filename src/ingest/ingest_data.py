@@ -7,7 +7,7 @@ the data as parquet files
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:25
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 17:34:06
+# @Last Modified time: 2021-10-27 16:48:28
 
 
 import os
@@ -27,6 +27,7 @@ spark = SparkSession.builder.getOrCreate()
 def read_csv_to_spark(
         spark: SparkSession,
         csv_file_path:str,
+        schema: str,
         status: str,
         tag: str,
         ) -> pd.DataFrame:
@@ -36,6 +37,7 @@ def read_csv_to_spark(
     Args:
         spark (SparkSession): Description
         csv_file_path (str): Path to csv file
+        schema (str): Table data schema
         status (str): status of the data [new]
         tag (str): tag for the data e.g. raw, processed
     
@@ -44,6 +46,7 @@ def read_csv_to_spark(
     """
     df = spark.read \
         .option("header", True) \
+        .schema(schema) \
         .csv(csv_file_path)
     df = df \
         .withColumn("status", lit(status)) \

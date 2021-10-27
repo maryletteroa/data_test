@@ -7,3 +7,4 @@ TODO:
 - [] shorten expectation suite names
 - [] profile test scripts
 - [] check name vs prefix arguments
+- [] add purge step for source files that have been loaded

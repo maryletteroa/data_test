@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 18:24:51
+# @Last Modified time: 2021-10-27 16:25:07
 
 import os
 import sys
@@ -103,9 +103,9 @@ class TestData:
 
     def test_raw_table_schema(self, datasets):
         raw_data_schema_stores = _parse_datatype_string("""
-            Store STRING,
+            Store INT,
             Type STRING,
-            Size STRING,
+            Size DECIMAL,
             status STRING,
             tag STRING,
             ingest_datetime TIMESTAMP,
@@ -113,11 +113,11 @@ class TestData:
         )
 
         raw_data_schema_sales = _parse_datatype_string("""
-            Store STRING,
+            Store INT,
             Dept STRING,
             Date STRING,
-            Weekly_Sales STRING,
-            IsHoliday STRING,
+            Weekly_Sales DECIMAL,
+            IsHoliday BOOLEAN,
             status STRING,
             tag STRING,
             ingest_datetime TIMESTAMP,
@@ -125,25 +125,20 @@ class TestData:
         )
 
         raw_data_schema_features = _parse_datatype_string("""
-            Store STRING,
+            Store INT,
             Date STRING,
-            Temperature STRING,
-            Fuel_Price STRING,
-            MarkDown1 STRING,
-            MarkDown2 STRING,
-            MarkDown3 STRING,
-            MarkDown4 STRING,
-            MarkDown5 STRING,
-            CPI STRING,
-            Unemployment STRING,
-            IsHoliday STRING,
+            Temperature DECIMAL,
+            Fuel_Price DECIMAL,
+            MarkDown DECIMAL,
+            CPI DECIMAL,
+            Unemployment DECIMAL,
+            IsHoliday BOOLEAN,
             status STRING,
             tag STRING,
             ingest_datetime TIMESTAMP,
             p_ingest_date DATE"""
         )
      
-
         assert datasets.stores.schema == raw_data_schema_stores
         assert datasets.sales.schema == raw_data_schema_sales
         assert datasets.features.schema == raw_data_schema_features

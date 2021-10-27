@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-24 14:27:58
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-27 11:18:19
+# @Last Modified time: 2021-10-27 16:44:09
 
 import os
 import sys
@@ -20,7 +20,7 @@ from glob import glob
 from collections import namedtuple
 
 from src.extract.extract_from_urls import *
-from src._includes.paths import test_data_urls, source_data_dir
+from src._includes.paths import data_urls, source_data_dir
 
 # functions that return data tables
 # to be used in succeeding tests
@@ -31,7 +31,7 @@ def test_exceptions_are_working():
         get_data_from_urls("invalid_url")
 
 def test_write_table_csv(tmpdir):
-    df = get_data_from_urls(test_data_urls["stores"])
+    df = get_data_from_urls(data_urls["stores"])
     write_table_csv(df.head(), tmpdir, "test")
     data_file = f"{tmpdir}/test.csv"
     assert os.path.exists(data_file)

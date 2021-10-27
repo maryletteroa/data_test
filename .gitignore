@@ -1,5 +1,4 @@
 .coverage
-.coveragerc
 .pytest_cache
 .mypy_cache
 sandbox

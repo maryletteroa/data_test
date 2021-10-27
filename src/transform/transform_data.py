@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-25 09:37:54
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 20:10:51
+# @Last Modified time: 2021-10-27 16:09:36
 
 
 
@@ -57,7 +57,6 @@ def transform_sales(
         .withColumn("tag", lit(tag)) \
         .withColumn("ingest_datetime", current_timestamp()) \
         .withColumn("p_ingest_date", current_date())
-
 
     return df
 
