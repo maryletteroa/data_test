@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-24 14:27:58
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 17:49:46
+# @Last Modified time: 2021-10-27 11:18:19
 
 import os
 import sys
@@ -64,6 +64,8 @@ class TestFilesExist:
     def test_source_data_dir_exists(self):
         assert os.path.exists(source_data_dir)
 
+    # add expect row count to be not zero
+
     def test_extracted_data(self, csvs):
 
         # extracted data exists in directory
@@ -95,12 +97,13 @@ class TestData:
             "stores": {"Store", "Type", "Size"},
             "sales": {"Store", "Dept", "Date", "Weekly_Sales"},
             "features": {"Fuel_Price", "Date", "Unemployment", 
-                "Store", "CPI", "Temperature", "IsHoliday"},
+                "Store", "Temperature", "IsHoliday"},
         }
 
         for name, cols in required_column_names.items():
             with accepted([
                 Extra("IsHoliday"),
+                Extra("CPI"),
                 Extra("MarkDown1"),
                 Extra("MarkDown2"),
                 Extra("MarkDown3"),
@@ -113,3 +116,6 @@ class TestData:
         dt.validate(datasets.stores, (int, str, int))
         dt.validate(datasets.sales,(int, int, str, float, bool))
         dt.validate(datasets.features, (int, str, *[float]*9, bool))
+
+
+# --------- expectation suite testing ------------- #

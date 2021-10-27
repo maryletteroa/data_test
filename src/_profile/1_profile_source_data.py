@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 10:02:24
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 17:00:28
+# @Last Modified time: 2021-10-27 13:09:39
 
 """
 Generates profiles of pertinent datasets
@@ -18,7 +18,8 @@ import pandas as pd
 from _includes.paths import (
     source_data_dir, 
     source_data_profile_dir, 
-    great_expectations_root
+    great_expectations_root,
+    expectations_suite_dir
 )
 from _profile._profile_data import generate_data_profile, build_expectation_suite_from_pandas_profiling
 from great_expectations.data_context import DataContext
@@ -27,6 +28,16 @@ from great_expectations.data_context import DataContext
 
 if not os.path.exists(source_data_profile_dir):
     os.mkdir(source_data_profile_dir)
+
+if glob(f"{source_data_profile_dir}/*") !=[]:
+    print(f"{source_data_profile_dir} not empty")
+    if glob(f"{expectations_suite_dir}/*") != []:
+        print(f"{expectations_suite_dir} not empty")
+        sys.exit()
+elif glob(f"{expectations_suite_dir}/*") != []:
+        print(f"{expectations_suite_dir} not empty")
+        sys.exit()
+
 
 for csv in glob(f"{source_data_dir}/*.csv"):
     basename = os.path.basename(csv)
@@ -38,6 +49,7 @@ for csv in glob(f"{source_data_dir}/*.csv"):
         output_dir=f"{source_data_profile_dir}",
         prefix=name,
     )
+
     build_expectation_suite_from_pandas_profiling(
         pandas_profile = profile,
         data_context = DataContext(

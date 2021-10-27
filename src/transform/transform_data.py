@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-25 09:37:54
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 18:16:07
+# @Last Modified time: 2021-10-25 20:10:51
 
 
 
@@ -15,6 +15,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
     current_timestamp, 
     current_date, 
+    current_timestamp,
     col,
     lit)
 
@@ -51,10 +52,10 @@ def transform_sales(
         .withColumn("dept", col("dept").cast("int")) \
         .withColumn("date", col("date").cast("date")) \
         .withColumn("weekly_sales", col("weekly_sales").cast("double")) \
-        .withRenamedColumn("isholiday", "is_holiday") \
-        .drop("is_holiday") \
+        .drop("isholiday") \
         .withColumn("status", lit(status)) \
         .withColumn("tag", lit(tag)) \
+        .withColumn("ingest_datetime", current_timestamp()) \
         .withColumn("p_ingest_date", current_date())
 
 
@@ -72,13 +73,13 @@ def transform_features(
         .withColumn("fuel_price", col("fuel_price").cast("decimal")) \
         .withColumn("date", col("date").cast("date")) \
         .withColumn("unemployment", col("unemployment").cast("decimal")) \
-        .drop("markdown1", "markdown2", "markdown3", "markdown4", "markdown5") \
+        .drop("cpi", "markdown1", "markdown2", "markdown3", "markdown4", "markdown5") \
         .withColumn("temperature", col("temperature").cast("decimal")) \
-        .withRenamedColumn("isholiday", "is_holiday") \
+        .withColumnRenamed("isholiday", "is_holiday") \
         .withColumn("is_holiday", col("is_holiday").cast("boolean")) \
         .withColumn("status", lit(status)) \
         .withColumn("tag", lit(tag)) \
+        .withColumn("ingest_datetime", current_timestamp()) \
         .withColumn("p_ingest_date", current_date())
 
-                
     return df

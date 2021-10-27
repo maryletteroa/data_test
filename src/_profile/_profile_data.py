@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
+
+"""Summary
+Functions to generate the data profiles and
+Great Expecations suites
+"""
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 10:02:12
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 09:30:35
-
-"""
-Function to generate the data profile
-"""
+# @Last Modified time: 2021-10-27 13:06:01
 
 import os
 import sys
@@ -17,8 +18,6 @@ from pandas_profiling import ProfileReport
 from great_expectations.data_context import DataContext
 from great_expectations.dataset import SparkDFDataset
 from great_expectations.profile.basic_dataset_profiler import BasicDatasetProfiler
-
-
 
 from datetime import datetime
 
@@ -40,8 +39,6 @@ def generate_data_profile(
     Returns:
         ProfileReport: A ProfileReport obect
     
-    Deleted Parameters:
-        name (str): Description
     """
     metadata = {
         "description": "This is a sample profiling report.", 
@@ -71,7 +68,15 @@ def build_expectation_suite_from_pandas_profiling(
     data_context: DataContext,
     suite_name: str,
     )-> None:
+    """Summary
+    
+    Builds GE expectations suite from pandas profiling
 
+    Args:
+        pandas_profile (ProfileReport): the pandas_profiling object
+        data_context (DataContext): GE data context object
+        suite_name (str): Suite name
+    """
     pandas_profile.to_expectation_suite(
         suite_name=suite_name,
         data_context=data_context,
@@ -83,12 +88,19 @@ def build_expectation_suite_from_spark(
     data: pd.DataFrame,
     expectations_path: str
     ) -> None:
+    """Summary
+    
+    Generations expectation suits from Spark dataframe
 
+    Args:
+        data (DataFrame): A Spark dataframe object
+        expectations_path (str): Where the expectation suite json file will be written
+    """
     profiler = BasicDatasetProfiler()
 
     expectation_suite, validation_result = \
         BasicDatasetProfiler.profile(
-            SparkDFDataset(data), 
+            data_asset=SparkDFDataset(data), 
         )
 
     with open(expectations_path, "w") as outf:

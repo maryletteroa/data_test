@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-24 14:26:29
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 17:36:00
+# @Last Modified time: 2021-10-27 12:54:07
 
 import os
 import sys
@@ -18,8 +18,8 @@ if not os.path.exists(source_data_dir):
     os.mkdir(source_data_dir)
 
 for name, url in data_urls.items():
-    print(f"getting data for: {name}...")
     if not os.path.exists(f"{source_data_dir}/{name}.csv"):
+        print(f"getting data for: {name}...")
         write_table_csv(
             table = get_data_from_urls(url),
             output_dir = f"{source_data_dir}",
