@@ -7,7 +7,7 @@ the data as parquet files
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:25
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-27 16:48:28
+# @Last Modified time: 2021-10-27 20:24:02
 
 
 import os
@@ -27,8 +27,6 @@ spark = SparkSession.builder.getOrCreate()
 def read_csv_to_spark(
         spark: SparkSession,
         csv_file_path:str,
-        schema: str,
-        status: str,
         tag: str,
         ) -> pd.DataFrame:
     """
@@ -37,8 +35,6 @@ def read_csv_to_spark(
     Args:
         spark (SparkSession): Description
         csv_file_path (str): Path to csv file
-        schema (str): Table data schema
-        status (str): status of the data [new]
         tag (str): tag for the data e.g. raw, processed
     
     Returns:
@@ -46,10 +42,8 @@ def read_csv_to_spark(
     """
     df = spark.read \
         .option("header", True) \
-        .schema(schema) \
         .csv(csv_file_path)
     df = df \
-        .withColumn("status", lit(status)) \
         .withColumn("tag", lit(tag)) \
         .withColumn("ingest_datetime", current_timestamp()) \
         .withColumn("p_ingest_date", current_date())
@@ -58,7 +52,7 @@ def read_csv_to_spark(
 
 # data checks before writing
 
-def write_delta_table(
+def write_spark_table(
         data: pd.DataFrame,
         partition_col: str,
         output_dir: str,

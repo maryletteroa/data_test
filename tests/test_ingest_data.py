@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-27 16:25:07
+# @Last Modified time: 2021-10-27 20:24:11
 
 import os
 import sys
@@ -71,7 +71,7 @@ def test_read_csv_to_spark(test_csv):
             if col in df.columns
         )
 
-def test_write_delta_table(tmpdir, test_csv):
+def test_write_spark_table(tmpdir, test_csv):
     df = read_csv_to_spark(
             spark = spark,
             csv_file_path = test_csv,
@@ -79,7 +79,7 @@ def test_write_delta_table(tmpdir, test_csv):
             tag = "raw",
     )
 
-    write_delta_table(
+    write_spark_table(
         data=df,
         partition_col = "p_ingest_date",
         output_dir = tmpdir,

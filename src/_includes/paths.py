@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 17:14:05
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-27 17:33:27
+# @Last Modified time: 2021-10-27 22:33:00
 
 """
 Contains shared variables
@@ -23,6 +23,7 @@ transformed_data_dir = f"{data_dir}/2_transformed"
 data_profile_dir = f"{docs_dir}/data_profiles"
 source_data_profile_dir = f"{data_profile_dir}/0_source"
 raw_data_profile_dir = f"{data_profile_dir}/1_raw"
+transformed_data_profile_dir = f"{data_profile_dir}/2_transformed"
 
 
 # great_expectations
