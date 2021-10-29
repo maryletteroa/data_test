@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:11
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 12:03:20
+# @Last Modified time: 2021-10-29 14:26:53
 
 import os
 import sys
@@ -30,5 +30,5 @@ for name in names:
         partition_col = "p_ingest_date",
         output_dir = raw_data_dir,
         name = name,
-        mode = "append",
+        mode = "overwrite",
     )

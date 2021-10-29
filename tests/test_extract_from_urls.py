@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-24 14:27:58
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-27 16:44:09
+# @Last Modified time: 2021-10-29 12:23:49
 
 import os
 import sys
@@ -85,8 +85,8 @@ class TestData:
     def test_shapes(self, datasets):
         shapes = {
             "stores" : (45, 3),
-            "sales" : (421570, 5),
-            "features" : (8190, 12),
+            "sales" : (10000, 5),
+            "features" : (8190, 8),
         }
 
         for name, shape in shapes.items():
@@ -97,25 +97,19 @@ class TestData:
             "stores": {"Store", "Type", "Size"},
             "sales": {"Store", "Dept", "Date", "Weekly_Sales"},
             "features": {"Fuel_Price", "Date", "Unemployment", 
-                "Store", "Temperature", "IsHoliday"},
+                "Store", "Temperature", "IsHoliday", "CPI", "MarkDown"},
         }
 
         for name, cols in required_column_names.items():
             with accepted([
                 Extra("IsHoliday"),
-                Extra("CPI"),
-                Extra("MarkDown1"),
-                Extra("MarkDown2"),
-                Extra("MarkDown3"),
-                Extra("MarkDown4"),
-                Extra("MarkDown5"),
             ]):
                 dt.validate(getattr(datasets, name).columns, cols)
 
     def test_data_types(self, datasets):
         dt.validate(datasets.stores, (int, str, int))
         dt.validate(datasets.sales,(int, int, str, float, bool))
-        dt.validate(datasets.features, (int, str, *[float]*9, bool))
+        dt.validate(datasets.features, (int, str, *[float]*5, bool))
 
 
 # --------- expectation suite testing ------------- #

@@ -2,14 +2,14 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 10:20:59
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-27 20:24:11
+# @Last Modified time: 2021-10-29 14:06:00
 
 import os
 import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from glob import glob
-from src._includes.paths import test_data_urls, raw_data_dir
+from src._includes.paths import data_urls, raw_data_dir
 from src.extract.extract_from_urls import write_table_csv, get_data_from_urls
 from src.ingest.ingest_data import *
 
@@ -31,7 +31,7 @@ spark = SparkSession.builder.getOrCreate()
 @pytest.fixture
 def test_csv(tmpdir):
     write_table_csv(
-        get_data_from_urls(test_data_urls["stores"]).head(), 
+        get_data_from_urls(data_urls["stores"]).head(), 
         tmpdir, 
         "test"
     )
@@ -45,37 +45,23 @@ def tables():
         f"{raw_data_dir}/features"
     )
 
-@pytest.fixture
-def datasets(tables):
-    Data = namedtuple("Data", ("stores", "sales", "features"))
-    data = Data(
-        stores = spark.read.load(tables[0]),
-        sales = spark.read.load(tables[1]),
-        features = spark.read.load(tables[2]),
-    )
-    return data
-
 # ---- end fixtures ------#
 
 
 
 def test_read_csv_to_spark(test_csv):
     df = read_csv_to_spark(
-            spark = spark,
             csv_file_path = test_csv,
-            status = "new",
             tag = "raw",
             )
     assert all(
-            col for col in ["status", "p_ingest_date", "tag", "ingest_datetime"] 
+            col for col in ["p_ingest_date", "tag", "ingest_datetime"] 
             if col in df.columns
         )
 
 def test_write_spark_table(tmpdir, test_csv):
     df = read_csv_to_spark(
-            spark = spark,
             csv_file_path = test_csv,
-            status = "new",
             tag = "raw",
     )
 
@@ -100,50 +86,3 @@ class TestData:
 
         # no other file present in folder
         assert set(glob(f"{raw_data_dir}/*")) == set(tables)
-
-    def test_raw_table_schema(self, datasets):
-        raw_data_schema_stores = _parse_datatype_string("""
-            Store INT,
-            Type STRING,
-            Size DECIMAL,
-            status STRING,
-            tag STRING,
-            ingest_datetime TIMESTAMP,
-            p_ingest_date DATE"""
-        )
-
-        raw_data_schema_sales = _parse_datatype_string("""
-            Store INT,
-            Dept STRING,
-            Date STRING,
-            Weekly_Sales DECIMAL,
-            IsHoliday BOOLEAN,
-            status STRING,
-            tag STRING,
-            ingest_datetime TIMESTAMP,
-            p_ingest_date DATE"""
-        )
-
-        raw_data_schema_features = _parse_datatype_string("""
-            Store INT,
-            Date STRING,
-            Temperature DECIMAL,
-            Fuel_Price DECIMAL,
-            MarkDown DECIMAL,
-            CPI DECIMAL,
-            Unemployment DECIMAL,
-            IsHoliday BOOLEAN,
-            status STRING,
-            tag STRING,
-            ingest_datetime TIMESTAMP,
-            p_ingest_date DATE"""
-        )
-     
-        assert datasets.stores.schema == raw_data_schema_stores
-        assert datasets.sales.schema == raw_data_schema_sales
-        assert datasets.features.schema == raw_data_schema_features
-
-    def test_raw_table_shape(self, datasets):
-        assert (datasets.stores.count(), len(datasets.stores.columns)) == (45, 7)
-        assert (datasets.sales.count(), len(datasets.sales.columns)) == (421570, 9)
-        assert (datasets.features.count(), len(datasets.features.columns)) == (8190, 16)

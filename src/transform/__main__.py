@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-25 09:38:06
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 12:03:30
+# @Last Modified time: 2021-10-29 14:37:53
 
 import os
 import sys
@@ -15,7 +15,8 @@ from transform.transform_data import (
     transform_sales,
     transform_features,
     tag_negative_sales,
-    negative_sales_to_null
+    negative_sales_to_null,
+    spark
 )
 
 

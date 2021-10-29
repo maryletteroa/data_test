@@ -2,18 +2,16 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-29 10:27:33
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 12:11:01
+# @Last Modified time: 2021-10-29 16:35:59
 
 
 import pandas as pd
-from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
     lit,
     current_timestamp,
     current_date
 )
 
-spark = SparkSession.builder.getOrCreate()
 
 
 # sales with stores
