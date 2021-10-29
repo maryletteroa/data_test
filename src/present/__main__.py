@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-29 10:27:46
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 12:02:59
+# @Last Modified time: 2021-10-29 18:13:17
 
 import os
 import sys
@@ -13,11 +13,14 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from _includes.paths import clean_data_dir, present_data_dir
 from ingest.ingest_data import write_spark_table
 
-from presentation.present_data import (
+from present.present_data import (
     generate_sales_department_data, 
-    generate_ds_department_data,
-    spark
+    generate_ds_department_data
 )
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.getOrCreate()
+
 
 from dataclasses import dataclass
 
@@ -41,6 +44,7 @@ data = Data(
 )
 
 
+print("writing presentation table for sales department ...")
 write_spark_table(
     data = generate_sales_department_data(
         stores_table = data.stores,
@@ -52,6 +56,8 @@ write_spark_table(
     mode = "append"
 )
 
+
+print("writing presentation table for data science department ...")
 write_spark_table(
     data = generate_ds_department_data(
         stores_table = data.stores,

@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-29 12:16:08
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 16:53:36
+# @Last Modified time: 2021-10-29 17:59:47
 
 import os
 import sys
@@ -15,7 +15,7 @@ from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.getOrCreate()
 
-from src.presentation.present_data import (
+from src.present.present_data import (
     generate_sales_department_data,
     generate_ds_department_data
 )

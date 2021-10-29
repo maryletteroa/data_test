@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-25 09:38:06
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 14:37:53
+# @Last Modified time: 2021-10-29 18:05:07
 
 import os
 import sys
@@ -25,10 +25,7 @@ from glob import glob
 if not os.path.exists(clean_data_dir):
     os.mkdir(clean_data_dir)
 
-
-names = ("stores", "sales", "features")
-
-
+print("writing clean stores table...")
 write_spark_table(
         data = transform_stores(
             path=f"{raw_data_dir}/stores",
@@ -40,7 +37,7 @@ write_spark_table(
         mode = "append",
     )
 
-
+print("writing clean features table...")
 write_spark_table(
         data = transform_features(
             path=f"{raw_data_dir}/features",
@@ -63,6 +60,7 @@ sales_tables = tag_negative_sales(
     tag = "quarantined",
     )
 
+print("writing clean stores sales...")
 write_spark_table(
         data = sales_tables.good,
         partition_col = "p_ingest_date",
@@ -76,6 +74,7 @@ sales_tables.quarantined = negative_sales_to_null(
     data = sales_tables.quarantined,
     )
 
+print("taking action on quarantined sales table...")
 write_spark_table(
         data = sales_tables.quarantined,
         partition_col = "p_ingest_date",

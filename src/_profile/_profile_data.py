@@ -7,7 +7,7 @@ Great Expecations suites
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 10:02:12
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 16:59:59
+# @Last Modified time: 2021-10-29 19:04:03
 
 import os
 import sys
@@ -119,8 +119,7 @@ def build_expectation_suite_from_spark(
         data (DataFrame): A Spark dataframe object
         expectations_path (str): Where the expectation suite json file will be written
     """
-    profiler = BasicDatasetProfiler()
-
+    
     expectation_suite, validation_result = \
         BasicDatasetProfiler.profile(
             data_asset=SparkDFDataset(data), 
@@ -128,3 +127,5 @@ def build_expectation_suite_from_spark(
 
     with open(expectations_path, "w") as outf:
         print(expectation_suite, file=outf)
+
+    
