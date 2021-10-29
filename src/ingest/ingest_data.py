@@ -7,7 +7,7 @@ the data as parquet files
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:25
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-27 20:24:02
+# @Last Modified time: 2021-10-29 10:49:45
 
 
 import os
@@ -25,7 +25,6 @@ from pyspark.sql.functions import (
 spark = SparkSession.builder.getOrCreate()
 
 def read_csv_to_spark(
-        spark: SparkSession,
         csv_file_path:str,
         tag: str,
         ) -> pd.DataFrame:

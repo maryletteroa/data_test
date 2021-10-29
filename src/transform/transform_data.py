@@ -6,7 +6,7 @@ Functions to transform raw  table
 # @Author: Marylette B. Roa
 # @Date:   2021-10-25 09:37:54
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-27 22:20:35
+# @Last Modified time: 2021-10-29 10:32:35
 
 
 
@@ -15,6 +15,7 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import pandas as pd
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
     current_timestamp, 
@@ -24,12 +25,13 @@ from pyspark.sql.functions import (
     lit,
     to_date,
     date_format,
+    when,
 )
 
-from dataclasses import dataclass
-
-
 spark = SparkSession.builder.getOrCreate()
+
+
+from dataclasses import dataclass
 
 
 def transform_stores(
@@ -164,3 +166,27 @@ def tag_negative_sales(
         good = df_good,
         quarantined= df_quarantine,
         )
+
+def negative_sales_to_null(
+    data: pd.DataFrame,
+    ) -> pd.DataFrame:
+    """Summary
+    
+    Updates the values of negative sales to null
+
+    Args:
+        data (pd.DataFrame): Spark datafrane
+        tag (str): Tag column value
+    
+    Returns:
+        pd.DataFrame: Spark dataframe
+    """
+    data = data \
+        .withColumn(
+            "weekly_sales", 
+            when(col("weekly_sales") < 0, None) \
+            .otherwise(col("weekly_sales"))
+        ) 
+
+    return data
+

@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-20 17:14:05
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-27 22:33:00
+# @Last Modified time: 2021-10-29 11:49:19
 
 """
 Contains shared variables
@@ -17,13 +17,15 @@ docs_dir = f"{root_dir}/docs"
 data_dir = f"{root_dir}/data"
 source_data_dir = f"{data_dir}/0_source"
 raw_data_dir = f"{data_dir}/1_raw"
-transformed_data_dir = f"{data_dir}/2_transformed"
+clean_data_dir = f"{data_dir}/2_clean"
+present_data_dir = f"{data_dir}/3_present"
 
 # profile dirs
 data_profile_dir = f"{docs_dir}/data_profiles"
 source_data_profile_dir = f"{data_profile_dir}/0_source"
 raw_data_profile_dir = f"{data_profile_dir}/1_raw"
-transformed_data_profile_dir = f"{data_profile_dir}/2_transformed"
+clean_data_profile_dir = f"{data_profile_dir}/2_clean"
+present_data_profile_dir = f"{data_profile_dir}/3_present"
 
 
 # great_expectations
