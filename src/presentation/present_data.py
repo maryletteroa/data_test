@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+"""
+Functions to prepare data for consumption of the
+sales and data science (ds) department
+"""
 # @Author: Marylette B. Roa
 # @Date:   2021-10-29 10:27:33
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 16:35:59
+# @Last Modified time: 2021-10-29 17:12:34
 
 
 import pandas as pd
@@ -13,15 +17,19 @@ from pyspark.sql.functions import (
 )
 
 
-
-# sales with stores
-
 def generate_sales_department_data(
     stores_table: pd.DataFrame,
     sales_table: pd.DataFrame,
     ) -> pd.DataFrame:
-
+    """
     
+    Args:
+        stores_table (pd.DataFrame): Spark table containing stores data
+        sales_table (pd.DataFrame): Spark table containing sales data
+    
+    Returns:
+        pd.DataFrame: Spark table for sales department
+    """
     df_stores = stores_table \
         .select("store", "type")
 
@@ -46,8 +54,16 @@ def generate_ds_department_data(
     sales_table: pd.DataFrame,
     features_table: pd.DataFrame,
     ) -> pd.DataFrame:
-
-
+    """
+    
+    Args:
+        stores_table (pd.DataFrame): Spark table containing stores data
+        sales_table (pd.DataFrame): Spark table containing sales data
+        features_table (pd.DataFrame): Spark table containing features data
+    
+    Returns:
+        pd.DataFrame: Spark table for data science department
+    """
     df_stores = stores_table \
         .select("store", "type", "size")
 

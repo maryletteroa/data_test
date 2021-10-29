@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Summary
+"""
 Functions to transform raw  table
 """
 
 # @Author: Marylette B. Roa
 # @Date:   2021-10-25 09:37:54
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 10:32:35
+# @Last Modified time: 2021-10-29 17:12:05
 
 
 
@@ -38,7 +38,7 @@ def transform_stores(
         path: str,
         tag: str,
     ) -> pd.DataFrame:
-    """Summary
+    """
     Transform stores table
     
     Args:
@@ -63,7 +63,7 @@ def transform_sales(
     path: str,
     tag: str
     ) -> pd.DataFrame:
-    """Summary
+    """
     Transform stores table
     
     Args:
@@ -93,7 +93,7 @@ def transform_features(
     path: str,
     tag: str
     ) -> pd.DataFrame:
-    """Summary
+    """
     Transform stores table
     
     Args:
@@ -130,7 +130,7 @@ def transform_features(
 @dataclass
 class Sales:
 
-    """Summary
+    """
     Contains the partitioned Sales data
     good and quarantined
     """
@@ -144,8 +144,10 @@ def tag_negative_sales(
     data: pd.DataFrame,
     tag: str,
     ) -> Sales:
-    """Summary
-    
+    """
+
+    Adds tags to sales data with negative values
+
     Args:
         data (pd.DataFrame): Spark dataframe containing sales table
         tag (str): Tag for quarantined table
@@ -170,8 +172,8 @@ def tag_negative_sales(
 def negative_sales_to_null(
     data: pd.DataFrame,
     ) -> pd.DataFrame:
-    """Summary
-    
+    """
+
     Updates the values of negative sales to null
 
     Args:

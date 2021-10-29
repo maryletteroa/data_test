@@ -7,7 +7,7 @@ Great Expecations suites
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 10:02:12
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-27 18:39:29
+# @Last Modified time: 2021-10-29 16:59:59
 
 import os
 import sys
@@ -89,6 +89,24 @@ def build_expectation_suite_from_pandas_profiling(
         build_data_docs=True,
         )
 
+def generate_data_profile_from_spark(
+    data: pd.DataFrame,
+    output_dir: str,
+    prefix: str
+    ) -> None:
+    """
+    Generates profile reports from Spark tables
+    
+    Args:
+        data (pd.DataFrame): Spark Dataframe
+        input_dir (str): Path to Spark tables (parquet)
+        output_dir (str): Output directory of HTML report
+        prefix (str): Prefix of HTML file
+    """
+    profile = spark_df_profiling.ProfileReport(data)
+    profile.to_file(outputfile=f"{output_dir}/{prefix}_data_profile_report.html")
+
+
 def build_expectation_suite_from_spark(
     data: pd.DataFrame,
     expectations_path: str
@@ -110,20 +128,3 @@ def build_expectation_suite_from_spark(
 
     with open(expectations_path, "w") as outf:
         print(expectation_suite, file=outf)
-
-def generate_data_profile_from_spark(
-    data: pd.DataFrame,
-    output_dir: str,
-    prefix: str
-    ) -> None:
-    """
-    Generates profile reports from Spark tables
-    
-    Args:
-        data (pd.DataFrame): Spark Dataframe
-        input_dir (str): Path to Spark tables (parquet)
-        output_dir (str): Output directory of HTML report
-        prefix (str): Prefix of HTML file
-    """
-    profile = spark_df_profiling.ProfileReport(data)
-    profile.to_file(outputfile=f"{output_dir}/{prefix}_data_profile_report.html")
