@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 10:02:24
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 18:58:26
+# @Last Modified time: 2021-10-30 11:00:23
 
 """
 Generates profiles of pertinent datasets
@@ -22,7 +22,8 @@ from _includes.paths import (
     great_expectations_root,
     expectations_suite_dir
 )
-from _profile._profile_data import generate_data_profile_from_csv, build_expectation_suite_from_pandas_profiling
+from _profile._profile_data import generate_data_profile_from_csv
+from _profile._build_expectation_suite import build_expectation_suite_from_pandas_profiling
 from great_expectations.data_context import DataContext
 
 
