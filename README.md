@@ -1,5 +1,5 @@
 # Introduction
-This repository contains examples on code and data tests using the following tools:
+This repository contains examples of code and data tests using the following tools:
 
 - [pytest](https://docs.pytest.org/en/6.2.x/)
 - [pytest-cov](https://pytest-cov.readthedocs.io/en/latest/)
@@ -15,12 +15,12 @@ The datasets were downloaded from Kaggle ([Retail Data Analytics - Historical sa
 - [sales](https://docs.google.com/spreadsheets/d/e/2PACX-1vRxhXER2cpZpyHf1q4Icfc7pT1WrNUR12EZvwa2FHGwuSzzgGr8uIbrtm5jyemvb6HMbfLO9JxUGgLn/pubhtml)
 - [features](https://docs.google.com/spreadsheets/d/e/2PACX-1vQvWZRXlB3GMeJRnJQnylZK1G6JFH4oAg8dnNPuQITB0KHZIFO-6ku1hud6zFct3IoNpHINtY_XAiIY/pubhtml)
 
-The data pipeline includes:
+The data pipeline consists of the following steps:
 
-- extraction of data from the web and writing them as csv files
-- loading the data into raw spark tables and attaching tags and metadata (ingestion date and time)
-- transforming the data: dropping columns or renaming columns, correcting data types, tagging and correcting flagged values (negative sales), and metadata tagging
-- creating presentation data for the sales, and datascience teams which requires combining elements of these datasets
+1. Extraction of data from the web and writing them as csv files
+2. Loading the data into raw spark tables and attaching tags and metadata (ingestion date and time)
+3. Transforming the data: dropping columns or renaming columns, correcting data types, tagging and correcting flagged values (negative sales), and metadata tagging
+4. Creating presentation data for the sales, and datascience teams which requires combining elements of these datasets
 
 # Getting Started
 
@@ -64,7 +64,7 @@ make validations
 
 ## The long way
 
-Aside from the steps above, rebuilding the pipeline requires manually regenerating and editing the expectation suites. For reference, save a copy of the `great_expectations` root directory located in `docs/great_expectations`.
+Rebuilding this example from scratch requires manually regenerating and editing the expectation suites. For reference, copy the `great_expectations` root directory located at `docs/great_expectations` in another folder.
 
 Clean up:
 
@@ -104,7 +104,7 @@ Generate the data profiles and expectation suites
 make expectations
 ```
 
-Edit the expectation suite json files located in `docs/great_expectations/expectations`by changing the `expectation_suite_name` value from `default` to more descriptive names.
+Edit the expectation suite JSON files located in `docs/great_expectations/expectations`by changing the `expectation_suite_name` value from `default` to more descriptive names.
 
 
 Build the documentations
