@@ -21,7 +21,6 @@ sphinx = "*"
 pytest-cov = "*"
 pre-commit = "*"
 datatest = "*"
-databricks-cli = "*"
 
 [requires]
 python_version = "3.9"
