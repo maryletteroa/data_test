@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Summary
+"""
 Function to retrive data from url
 and write them to csv
 
@@ -8,7 +8,7 @@ and write them to csv
 # @Author: Marylette B. Roa
 # @Date:   2021-10-24 14:26:09
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-25 17:15:55
+# @Last Modified time: 2021-11-03 08:47:50
 
 import os
 import sys

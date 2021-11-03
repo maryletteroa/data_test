@@ -6,7 +6,7 @@ sales and data science (ds) department
 # @Author: Marylette B. Roa
 # @Date:   2021-10-29 10:27:33
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 18:13:05
+# @Last Modified time: 2021-11-03 08:48:11
 
 
 import pandas as pd
@@ -15,20 +15,20 @@ from pyspark.sql.functions import (
     current_timestamp,
     current_date
 )
+from pyspark.sql.dataframe import DataFrame as pyspark_DataFrame
 
 
 def generate_sales_department_data(
-    stores_table: pd.DataFrame,
-    sales_table: pd.DataFrame,
-    ) -> pd.DataFrame:
+    stores_table: pyspark_DataFrame,
+    sales_table: pyspark_DataFrame,
+    ) -> pyspark_DataFrame:
     """
-    
     Args:
-        stores_table (pd.DataFrame): Spark table containing stores data
-        sales_table (pd.DataFrame): Spark table containing sales data
+        stores_table (pyspark_DataFrame): Spark table containing stores data
+        sales_table (pyspark_DataFrame): Spark table containing sales data
     
     Returns:
-        pd.DataFrame: Spark table for sales department
+        pyspark_DataFrame: Spark table for sales department
     """
     df_stores = stores_table \
         .select("store", "type")
@@ -50,19 +50,18 @@ def generate_sales_department_data(
 
 # features with sales with stores
 def generate_ds_department_data(
-    stores_table: pd.DataFrame,
-    sales_table: pd.DataFrame,
-    features_table: pd.DataFrame,
-    ) -> pd.DataFrame:
+    stores_table: pyspark_DataFrame,
+    sales_table: pyspark_DataFrame,
+    features_table: pyspark_DataFrame,
+    ) -> pyspark_DataFrame:
     """
-    
     Args:
-        stores_table (pd.DataFrame): Spark table containing stores data
-        sales_table (pd.DataFrame): Spark table containing sales data
-        features_table (pd.DataFrame): Spark table containing features data
+        stores_table (pyspark_DataFrame): Spark table containing stores data
+        sales_table (pyspark_DataFrame): Spark table containing sales data
+        features_table (pyspark_DataFrame): Spark table containing features data
     
     Returns:
-        pd.DataFrame: Spark table for data science department
+        pyspark_DataFrame: Spark table for data science department
     """
     df_stores = stores_table \
         .select("store", "type", "size")

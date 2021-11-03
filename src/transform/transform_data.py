@@ -6,7 +6,7 @@ Functions to transform raw  table
 # @Author: Marylette B. Roa
 # @Date:   2021-10-25 09:37:54
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 17:12:05
+# @Last Modified time: 2021-11-03 08:49:00
 
 
 
@@ -27,6 +27,8 @@ from pyspark.sql.functions import (
     date_format,
     when,
 )
+from pyspark.sql.dataframe import DataFrame as pyspark_DataFrame
+
 
 spark = SparkSession.builder.getOrCreate()
 
@@ -37,7 +39,7 @@ from dataclasses import dataclass
 def transform_stores(
         path: str,
         tag: str,
-    ) -> pd.DataFrame:
+    ) -> pyspark_DataFrame:
     """
     Transform stores table
     
@@ -46,7 +48,7 @@ def transform_stores(
         tag (str): tag for the data e.g. raw, processed
     
     Returns:
-        pd.DataFrame: Transformed and tagged spark table
+        pyspark_DataFrame: Transformed and tagged spark table
     """
     df = spark.read.load(path)
     df = df \
@@ -62,7 +64,7 @@ def transform_stores(
 def transform_sales(
     path: str,
     tag: str
-    ) -> pd.DataFrame:
+    ) -> pyspark_DataFrame:
     """
     Transform stores table
     
@@ -71,7 +73,7 @@ def transform_sales(
         tag (str): tag for the data e.g. raw, processed
     
     Returns:
-        pd.DataFrame: Transformed and tagged spark table
+        pyspark_DataFrame: Transformed and tagged spark table
     """
     df = spark.read.load(path)
     df = df \
@@ -92,7 +94,7 @@ def transform_sales(
 def transform_features(
     path: str,
     tag: str
-    ) -> pd.DataFrame:
+    ) -> pyspark_DataFrame:
     """
     Transform stores table
     
@@ -101,7 +103,7 @@ def transform_features(
         tag (str): tag for the data e.g. raw, processed
     
     Returns:
-        pd.DataFrame: Transformed and tagged spark table
+        pyspark_DataFrame: Transformed and tagged spark table
     """
     df = spark.read.load(path)
     df = df \
@@ -141,15 +143,15 @@ class Sales:
 
 
 def tag_negative_sales(
-    data: pd.DataFrame,
+    data: pyspark_DataFrame,
     tag: str,
     ) -> Sales:
     """
-
+    
     Adds tags to sales data with negative values
-
+    
     Args:
-        data (pd.DataFrame): Spark dataframe containing sales table
+        data (pyspark_DataFrame): Spark dataframe containing sales table
         tag (str): Tag for quarantined table
     
     Returns:
@@ -170,18 +172,18 @@ def tag_negative_sales(
         )
 
 def negative_sales_to_null(
-    data: pd.DataFrame,
-    ) -> pd.DataFrame:
+    data: pyspark_DataFrame,
+    ) -> pyspark_DataFrame:
     """
-
+    
     Updates the values of negative sales to null
-
+    
     Args:
-        data (pd.DataFrame): Spark datafrane
-        tag (str): Tag column value
+        data (pyspark_DataFrame): Spark datafrane
     
     Returns:
-        pd.DataFrame: Spark dataframe
+        pyspark_DataFrame: Spark dataframe
+    
     """
     data = data \
         .withColumn(

@@ -5,7 +5,6 @@ sandbox
 data/*
 docs/data_profiles/*
 docs/coverage_html_report
-docs/great_expectations
 __pycache__
 .pre-commit-config.yaml
 License.txt

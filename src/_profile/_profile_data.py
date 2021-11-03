@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
-"""Summary
+"""
 Functions to generate the data profiles and
 Great Expecations suites
+
+Attributes:
+    spark (TYPE): Description
 """
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 10:02:12
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-30 11:08:13
+# @Last Modified time: 2021-11-03 08:47:30
 
 import os
 import sys

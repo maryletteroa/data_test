@@ -3,14 +3,11 @@
 Functions to ingest and tag data, and write
 the data as parquet files
 
-Attributes:
-    spark (TYPE): Description
-
 """
 # @Author: Marylette B. Roa
 # @Date:   2021-10-21 14:44:25
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 17:10:56
+# @Last Modified time: 2021-11-03 08:48:51
 
 
 import os
@@ -24,6 +21,8 @@ from pyspark.sql.functions import (
     current_date,
     current_timestamp, 
     lit)
+from pyspark.sql.dataframe import DataFrame as pyspark_DataFrame
+
 
 spark = SparkSession.builder.getOrCreate()
 
@@ -57,7 +56,7 @@ def read_csv_to_spark(
 # data checks before writing
 
 def write_spark_table(
-        data: pd.DataFrame,
+        data: pyspark_DataFrame,
         partition_col: str,
         output_dir: str,
         name: str,
@@ -67,7 +66,7 @@ def write_spark_table(
     """Writes data to delta table
     
     Args:
-        data (pd.DataFrame): Spark dataframe
+        data (pyspark_DataFrame): Spark dataframe
         partition_col (str): Column name where table will be partitioned
         output_dir (str): Output directory
         name (str): Name of table

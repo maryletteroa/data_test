@@ -5,7 +5,7 @@ Functions to build Great Expectations suite
 # @Author: Marylette B. Roa
 # @Date:   2021-10-30 09:35:27
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-30 11:09:01
+# @Last Modified time: 2021-11-03 08:47:18
 
 import os
 import sys
@@ -32,6 +32,9 @@ def build_expectation_suite_from_pandas_profiling(
         pandas_profile (ProfileReport): the pandas_profiling object
         data_context (DataContext): GE data context object
         suite_name (str): Suite name
+    
+    Returns:
+        None: Description
     
     """
     return pandas_profile.to_expectation_suite(

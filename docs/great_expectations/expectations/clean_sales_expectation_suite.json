@@ -1,928 +1,229 @@
 {
-  "expectations": [
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "min_value": 0,
-        "max_value": null
-      },
-      "expectation_type": "expect_table_row_count_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column_list": null
-      },
-      "expectation_type": "expect_table_columns_to_match_ordered_list",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "store",
-        "type_list": [
-          "BIGINT",
-          "BYTEINT",
-          "INT",
-          "INT64",
-          "INTEGER",
-          "INTEGER",
-          "IntegerType",
-          "LongType",
-          "SMALLINT",
-          "TINYINT",
-          "int",
-          "int16",
-          "int32",
-          "int64",
-          "int8",
-          "int_",
-          "integer",
-          "uint16",
-          "uint32",
-          "uint64",
-          "uint8"
-        ]
-      },
-      "expectation_type": "expect_column_values_to_be_in_type_list",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "store",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_unique_value_count_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "store",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "store",
-        "mostly": 0.5
-      },
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "store",
-        "value_set": []
-      },
-      "expectation_type": "expect_column_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "store",
-        "value_set": null
-      },
-      "expectation_type": "expect_column_distinct_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "dept",
-        "type_list": [
-          "BIGINT",
-          "BYTEINT",
-          "INT",
-          "INT64",
-          "INTEGER",
-          "INTEGER",
-          "IntegerType",
-          "LongType",
-          "SMALLINT",
-          "TINYINT",
-          "int",
-          "int16",
-          "int32",
-          "int64",
-          "int8",
-          "int_",
-          "integer",
-          "uint16",
-          "uint32",
-          "uint64",
-          "uint8"
-        ]
-      },
-      "expectation_type": "expect_column_values_to_be_in_type_list",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "dept",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_unique_value_count_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "dept",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "dept",
-        "mostly": 0.5
-      },
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "dept",
-        "value_set": []
-      },
-      "expectation_type": "expect_column_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "dept",
-        "value_set": null
-      },
-      "expectation_type": "expect_column_distinct_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "date",
-        "type_list": [
-          "<M8[ns]",
-          "DATE",
-          "DATETIME",
-          "DATETIME2",
-          "DATETIME64",
-          "DATETIMEOFFSET",
-          "DateType",
-          "SMALLDATETIME",
-          "TIME",
-          "TIMESTAMP",
-          "Timestamp",
-          "TimestampType",
-          "datetime64",
-          "datetime64[ns]",
-          "timedelta[ns]"
-        ]
-      },
-      "expectation_type": "expect_column_values_to_be_in_type_list",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "date",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_unique_value_count_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "date",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "date",
-        "mostly": 0.5
-      },
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "date",
-        "value_set": []
-      },
-      "expectation_type": "expect_column_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "date",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_min_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "date",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_max_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "date",
-        "value_set": null
-      },
-      "expectation_type": "expect_column_distinct_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "type_list": [
-          "DECIMAL",
-          "DOUBLE",
-          "DOUBLE_PRECISION",
-          "DoubleType",
-          "FLOAT",
-          "FLOAT4",
-          "FLOAT64",
-          "FLOAT8",
-          "FloatType",
-          "NUMERIC",
-          "REAL",
-          "float16",
-          "float32",
-          "float64",
-          "float_",
-          "number"
-        ]
-      },
-      "expectation_type": "expect_column_values_to_be_in_type_list",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_unique_value_count_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "mostly": 0.5
-      },
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "value_set": []
-      },
-      "expectation_type": "expect_column_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_min_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_max_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_mean_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_median_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "quantile_ranges": {
-          "quantiles": [
-            0.05,
-            0.25,
-            0.5,
-            0.75,
-            0.95
-          ],
-          "value_ranges": [
-            [
-              null,
-              null
-            ],
-            [
-              null,
-              null
-            ],
-            [
-              null,
-              null
-            ],
-            [
-              null,
-              null
-            ],
-            [
-              null,
-              null
-            ]
-          ]
-        }
-      },
-      "expectation_type": "expect_column_quantile_values_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "weekly_sales",
-        "partition_object": null,
-        "threshold": null
-      },
-      "expectation_type": "expect_column_kl_divergence_to_be_less_than",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "tag",
-        "type_list": [
-          "CHAR",
-          "NCHAR",
-          "NTEXT",
-          "NVARCHAR",
-          "STRING",
-          "StringType",
-          "TEXT",
-          "VARCHAR",
-          "dtype('O')",
-          "object",
-          "str",
-          "string"
-        ]
-      },
-      "expectation_type": "expect_column_values_to_be_in_type_list",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "tag",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_unique_value_count_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "tag",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "tag",
-        "mostly": 0.5
-      },
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "tag",
-        "value_set": []
-      },
-      "expectation_type": "expect_column_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "tag",
-        "regex": "^\\s+|\\s+$"
-      },
-      "expectation_type": "expect_column_values_to_not_match_regex",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "tag",
-        "value_set": null
-      },
-      "expectation_type": "expect_column_distinct_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "ingest_datetime",
-        "type_list": [
-          "<M8[ns]",
-          "DATE",
-          "DATETIME",
-          "DATETIME2",
-          "DATETIME64",
-          "DATETIMEOFFSET",
-          "DateType",
-          "SMALLDATETIME",
-          "TIME",
-          "TIMESTAMP",
-          "Timestamp",
-          "TimestampType",
-          "datetime64",
-          "datetime64[ns]",
-          "timedelta[ns]"
-        ]
-      },
-      "expectation_type": "expect_column_values_to_be_in_type_list",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "ingest_datetime",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_unique_value_count_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "ingest_datetime",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "ingest_datetime",
-        "mostly": 0.5
-      },
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "ingest_datetime",
-        "value_set": []
-      },
-      "expectation_type": "expect_column_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "ingest_datetime",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_min_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "ingest_datetime",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_max_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "ingest_datetime",
-        "value_set": null
-      },
-      "expectation_type": "expect_column_distinct_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "p_ingest_date",
-        "type_list": [
-          "<M8[ns]",
-          "DATE",
-          "DATETIME",
-          "DATETIME2",
-          "DATETIME64",
-          "DATETIMEOFFSET",
-          "DateType",
-          "SMALLDATETIME",
-          "TIME",
-          "TIMESTAMP",
-          "Timestamp",
-          "TimestampType",
-          "datetime64",
-          "datetime64[ns]",
-          "timedelta[ns]"
-        ]
-      },
-      "expectation_type": "expect_column_values_to_be_in_type_list",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "p_ingest_date",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_unique_value_count_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "p_ingest_date",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "p_ingest_date",
-        "mostly": 0.5
-      },
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "p_ingest_date",
-        "value_set": []
-      },
-      "expectation_type": "expect_column_values_to_be_in_set",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "p_ingest_date",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_min_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "p_ingest_date",
-        "min_value": null,
-        "max_value": null
-      },
-      "expectation_type": "expect_column_max_to_be_between",
-      "ge_cloud_id": null
-    },
-    {
-      "meta": {
-        "BasicDatasetProfiler": {
-          "confidence": "very low"
-        }
-      },
-      "kwargs": {
-        "column": "p_ingest_date",
-        "value_set": null
-      },
-      "expectation_type": "expect_column_distinct_values_to_be_in_set",
-      "ge_cloud_id": null
-    }
-  ],
   "data_asset_type": "Dataset",
   "expectation_suite_name": "clean_sales_expectation_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_table_columns_to_match_ordered_list",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column_list": [
+          "store",
+          "dept",
+          "date",
+          "weekly_sales",
+          "tag",
+          "ingest_datetime",
+          "p_ingest_date"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "store"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "store",
+        "type_list": [
+          "IntegerType"
+        ]
+      },
+      "meta": {
+        "notes": {
+          "content": [
+            "The column values should be stored in one of these types."
+          ],
+          "format": "markdown"
+        }
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "store",
+        "max_value": 45,
+        "min_value": 1
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "dept"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "dept"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "dept",
+        "type_list": [
+          "IntegerType"
+        ]
+      },
+      "meta": {
+        "notes": {
+          "content": [
+            "The column values should be stored in one of these types."
+          ],
+          "format": "markdown"
+        }
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "dept",
+        "max_value": 99,
+        "min_value": 1
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "date"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "date",
+        "type_list": [
+          "DateType"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "weekly_sales"
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "weekly_sales",
+        "mostly": 0.9
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "weekly_sales",
+        "type_list": [
+          "FloatType"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "weekly_sales",
+        "min_value": 0,
+        "mostly": 0.9
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "tag",
+        "type_list": [
+          "StringType"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "tag",
+        "value_set": [
+          "good",
+          "quarantined"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "ingest_datetime",
+        "type_list": [
+          "TimestampType"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_type_list",
+      "ge_cloud_id": null,
+      "kwargs": {
+        "column": "p_ingest_date",
+        "type_list": [
+          "DateType"
+        ]
+      },
+      "meta": {}
+    }
+  ],
+  "ge_cloud_id": null,
   "meta": {
-    "great_expectations_version": "0.13.39",
+    "BasicDatasetProfiler": {
+      "batch_kwargs": {
+        "ge_batch_id": "acf98cbe-3943-11ec-9e27-f83441fea041"
+      },
+      "created_at": 1635572340.1766794,
+      "created_by": "BasicDatasetProfiler"
+    },
+    "citations": [
+      {
+        "batch_kwargs": {
+          "ge_batch_id": "acf98cbe-3943-11ec-9e27-f83441fea041"
+        },
+        "citation_date": "2021-10-30T05:39:08.005683Z",
+        "comment": "BasicDatasetProfiler added a citation based on the current batch."
+      }
+    ],
     "columns": {
-      "store": {
-        "description": ""
-      },
-      "dept": {
-        "description": ""
-      },
       "date": {
         "description": ""
       },
-      "weekly_sales": {
-        "description": ""
-      },
-      "tag": {
+      "dept": {
         "description": ""
       },
       "ingest_datetime": {
@@ -930,30 +231,23 @@
       },
       "p_ingest_date": {
         "description": ""
+      },
+      "store": {
+        "description": ""
+      },
+      "tag": {
+        "description": ""
+      },
+      "weekly_sales": {
+        "description": ""
       }
     },
-    "BasicDatasetProfiler": {
-      "created_by": "BasicDatasetProfiler",
-      "created_at": 1635572340.1766794,
-      "batch_kwargs": {
-        "ge_batch_id": "acf98cbe-3943-11ec-9e27-f83441fea041"
-      }
-    },
+    "great_expectations_version": "0.13.39",
     "notes": {
-      "format": "markdown",
       "content": [
         "_To add additional notes, edit the <code>meta.notes.content</code> field in the appropriate Expectation json file._"
-      ]
-    },
-    "citations": [
-      {
-        "citation_date": "2021-10-30T05:39:08.005683Z",
-        "batch_kwargs": {
-          "ge_batch_id": "acf98cbe-3943-11ec-9e27-f83441fea041"
-        },
-        "comment": "BasicDatasetProfiler added a citation based on the current batch."
-      }
-    ]
-  },
-  "ge_cloud_id": null
+      ],
+      "format": "markdown"
+    }
+  }
 }
