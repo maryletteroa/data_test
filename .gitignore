@@ -3,8 +3,9 @@
 .mypy_cache
 sandbox
 data/*
-!.keep
+!*.keep
 docs/data_profiles/*
+!docs/data_profiles/*.keep
 docs/coverage_html_report
 __pycache__
 .pre-commit-config.yaml
