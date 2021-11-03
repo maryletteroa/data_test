@@ -3,6 +3,7 @@
 .mypy_cache
 sandbox
 data/*
+!.keep
 docs/data_profiles/*
 docs/coverage_html_report
 __pycache__
