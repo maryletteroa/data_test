@@ -12,14 +12,9 @@ great-expectations = "*"
 spark-df-profiling = {git = "https://github.com/julioasotodv/spark-df-profiling.git"}
 
 [dev-packages]
-isort = "*"
-flake8 = "*"
-black = "==21.9b0"
 mypy = "*"
 pytest = "*"
-sphinx = "*"
 pytest-cov = "*"
-pre-commit = "*"
 datatest = "*"
 
 [requires]
