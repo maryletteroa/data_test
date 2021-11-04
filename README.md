@@ -132,9 +132,9 @@ make validations
 # Directory Structure
 - `data` - contains the extracted csv, and spark parquet tables:
     - `0_source` - the extracted data in csv format
-    - `1_raw` - raw and tagged data in spark table format
-    - `2_clean` - transformed data in spark table format
-    - `3_present` - joined data in spark table format
+    - `1_raw` - raw and tagged data in parquet format
+    - `2_clean` - transformed data in parquet format
+    - `3_present` - joined data in parquet format
 - `docs` - contains documentation generated from pytest-cov (coverage), pandas and spark dataframe profiling, and `great_expectations` root directory
 - `scr` - scripts for running the data pipeline
 - `tests` - tests written with pytest and datatest
