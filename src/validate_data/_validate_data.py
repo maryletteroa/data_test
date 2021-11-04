@@ -5,7 +5,7 @@ Functions to validate data against GE expectation suites
 # @Author: Marylette B. Roa
 # @Date:   2021-10-30 15:22:55
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-11-03 08:49:14
+# @Last Modified time: 2021-11-04 23:00:04
 
 
 import datetime
@@ -111,5 +111,3 @@ def validate_spark_table(
     ).run()
     validation_result_identifier = results.list_validation_result_identifiers()[0]
     context.build_data_docs()
-    context.open_data_docs(validation_result_identifier)
-
