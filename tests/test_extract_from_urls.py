@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-24 14:27:58
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-29 12:23:49
+# @Last Modified time: 2021-11-09 18:10:38
 
 import os
 import sys
@@ -63,8 +63,6 @@ def datasets(csvs):
 class TestFilesExist:
     def test_source_data_dir_exists(self):
         assert os.path.exists(source_data_dir)
-
-    # add expect row count to be not zero
 
     def test_extracted_data(self, csvs):
 

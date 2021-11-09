@@ -2,14 +2,14 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-25 08:08:19
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-10-30 11:11:07
+# @Last Modified time: 2021-11-09 18:14:00
 
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from _includes.paths import raw_data_dir, expectations_suite_dir, raw_data_profile_dir
-from _profile._profile_data import (
+from _profile_data import (
     generate_data_profile_from_spark,
     spark)
 from _build_expectation_suite import build_expectation_suite_from_spark
