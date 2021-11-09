@@ -20,7 +20,7 @@ The data pipeline consists of the following steps:
 1. Extraction of data from the web and writing them as csv files
 2. Loading the data into raw spark tables and attaching tags and metadata (ingestion date and time)
 3. Transforming the data: dropping columns or renaming columns, correcting data types, tagging and correcting flagged values (negative sales), and metadata tagging
-4. Creating presentation data for the sales, and datascience teams which requires combining elements of these datasets
+4. Creating presentation data for the sales, and datascience teams which required table joins.
 
 # Getting Started
 
@@ -40,36 +40,30 @@ Scripts were developed using Python version 3.9.
 
 # Build and Test
 
-Command details are found in the `Makefile`.
+Check command details in the `Makefile`.
 
 ## Quick start
 
 Run the data pipeline
 
 ```sh
-make run
+make run-all
 ```
 
-Generate the data profiles
+This will run the scripts in the following sequence:
 
-```sh
-make profiles
 ```
-
-Run data validations
-
-```sh
-make validations
+step -> generate profile -> validate data -> (repeat for next step)
 ```
 
 ## The long way
 
-Rebuilding this example from scratch requires manually regenerating and editing the expectation suites. For reference, copy the `great_expectations` root directory located at `docs/great_expectations` in another folder.
+Rebuilding this example from scratch requires manually regenerating and editing the expectation suites. For reference, copy the `great_expectations` root directory located at `docs/great_expectations` into another folder.
 
 Clean up:
 
 ```sh
-make clean
+make clean-all
 ```
 
 Rerun the pipeline
@@ -77,12 +71,7 @@ Rerun the pipeline
 make run
 ```
 
-Run tests
-```sh
-make run-tests
-```
-
-Create `great_expectations` context
+Create `great_expectations` context. Skip adding datasource at this point.
 ```sh
 make ge-init
 ```
@@ -94,10 +83,10 @@ cd docs
 great_expectations datasource new
 ```
 
-- `source_dir` located at `data/0_source` (Pandas)
-- `raw_dir` located at `data/1_raw` (PySpark)
-- `clean_dir` located at `data/2_clean` (PySpark)
-- `present_dir` located at `data/3_present` (PySpark)
+- `source_dir` located at `../data/0_source` (Pandas)
+- `raw_dir` located at `../data/1_raw` (PySpark)
+- `clean_dir` located at `../data/2_clean` (PySpark)
+- `present_dir` located at `../data/3_present` (PySpark)
 
 Generate the data profiles and expectation suites
 ```sh

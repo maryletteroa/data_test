@@ -3,8 +3,24 @@ TEST_COVERAGE_CUTOFF=100
 clean:
 	rm -rf data/*
 	rm -rf docs/data_profiles/*
+	rm -rf docs/great_expectations/uncommitted/*
+clean-all:
+	rm -rf data/*
+	rm -rf docs/data_profiles/*
 	rm -rf docs/great_expectations
-	rm -rf /tmp/*
+run-all:
+	python src/extract
+	python src/_profile/profile_source_data.py
+	python src/validate_data/validate_source_data.py 
+	python src/ingest
+	python src/_profile/profile_raw_data.py
+	python src/validate_data/validate_raw_data.py
+	python src/transform
+	python src/_profile/profile_clean_data.py
+	python src/validate_data/validate_clean_data.py
+	python src/present
+	python src/_profile/profile_present_data.py
+	python src/validate_data/validate_present_data.py
 run:
 	python src/extract
 	python src/ingest

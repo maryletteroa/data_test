@@ -5,7 +5,7 @@ Functions to build Great Expectations suite
 # @Author: Marylette B. Roa
 # @Date:   2021-10-30 09:35:27
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-11-03 08:47:18
+# @Last Modified time: 2021-11-08 16:35:23
 
 import os
 import sys
@@ -16,7 +16,6 @@ from pandas_profiling import ProfileReport
 from great_expectations.data_context import DataContext
 from great_expectations.dataset import SparkDFDataset
 from great_expectations.profile.basic_dataset_profiler import BasicDatasetProfiler
-from great_expectations.profile.user_configurable_profiler import UserConfigurableProfiler
 from pyspark.sql.dataframe import DataFrame as pyspark_DataFrame
 
 def build_expectation_suite_from_pandas_profiling(
