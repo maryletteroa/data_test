@@ -2,7 +2,7 @@
 # @Author: Marylette B. Roa
 # @Date:   2021-10-24 14:27:58
 # @Last Modified by:   Marylette B. Roa
-# @Last Modified time: 2021-11-09 18:10:38
+# @Last Modified time: 2021-11-11 09:57:13
 
 import os
 import sys
@@ -36,6 +36,19 @@ def test_write_table_csv(tmpdir):
     data_file = f"{tmpdir}/test.csv"
     assert os.path.exists(data_file)
 
+def test_write_table_csv_2(tmpdir):
+    df = get_data_from_urls(data_urls["stores"])
+    write_table_csv(df.head(), tmpdir, "test")
+    data_file = f"{tmpdir}/test.csv"
+    assert os.path.exists(data_file)
+
+def test_store_data_columns(store_data):
+    with open(store_data) as s_d:
+        assert s_d.readlines()[0] == "Store,Type,Size\n"
+
+def test_store_data_columns_2(store_data):
+    with open(store_data) as s_d:
+        assert s_d.readlines()[0] == "Store,Type,Size\n"
 
 @pytest.fixture
 def csvs():
